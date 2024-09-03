@@ -12,7 +12,8 @@
     "format:check": "prettier . --check",
     "format": "prettier . --write",
     "lint": "eslint . ",
-    "lint:fix": "eslint . --fix "
+    "lint:fix": "eslint . --fix ",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "\"Greg Haris <d.gregharis@gmail.com>",
