@@ -6,6 +6,7 @@
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   align-content: center;
@@ -15,11 +16,10 @@ body {
 
 .container {
   display: flex;
-  /* align-items: baseline; */
   width: 80%;
   height: 80%;
   position: relative;
-  /* margin: 5% auto; */
+  align-items: center;
 }
 
 .container img {
@@ -34,6 +34,25 @@ body {
   display: block;
   animation-name: fadeIn;
   animation-duration: 1.5s;
+}
+
+.carouselNavBtn {
+  position: absolute;
+  justify-content: space-between;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 5rem;
+  cursor: pointer;
+}
+
+.carouselNavBtn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.next {
+  right: 0;
 }
 
 @keyframes fadeIn {
