@@ -3,5 +3,9 @@ export default function setInitiators() {
   let index = 0;
   let intervalID;
 
-  return { speed, index, intervalID };
+  return {
+    speed,
+    index,
+    intervalID,
+  };
 }

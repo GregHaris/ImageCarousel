@@ -1,9 +1,8 @@
 import { cacheDOM } from "./domUtils";
-import navigateCarousel from "./navbtns";
 import setInitiators from "./initiators";
-import { updateContent } from "./updateCarousel";
+import navigateCarousel from "./navbtns";
 
-const { images, dots } = cacheDOM();
+const { images, dots, description } = cacheDOM();
 let { speed, index, intervalID } = setInitiators();
 
 export default function createCarousel() {
@@ -11,7 +10,7 @@ export default function createCarousel() {
     if (intervalID) clearInterval(intervalID);
     intervalID = setInterval(() => {
       index = (index + 1) % images.length;
-      updateContent();
+      updateContent(index);
     }, speed);
   }
 
@@ -27,7 +26,7 @@ export default function createCarousel() {
       dotSpan.addEventListener("click", () => {
         index = i;
         startInterval();
-        updateContent();
+        updateContent(index);
       });
 
       dots.appendChild(dotSpan);
@@ -35,11 +34,20 @@ export default function createCarousel() {
   }
 
   function initializeCarousel() {
-    setupDots();
-    updateContent();
     startInterval();
+    setupDots();
     navigateCarousel();
   }
 
   initializeCarousel();
+}
+
+export function updateContent(index) {
+  images.forEach((image) => image.classList.remove("active"));
+  images[index].classList.add("active");
+
+  const dotSpans = document.querySelectorAll(".dot");
+  dotSpans.forEach((dot) => dot.classList.remove("active"));
+  dotSpans[index].classList.add("active");
+  description.textContent = images[index].dataset.desc;
 }
