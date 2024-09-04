@@ -19,26 +19,32 @@ export default function navigateCarousel() {
       images[newIndex].setAttribute("data-active", true);
 
       // Update the content
-      updateContent();
+      updateContent(newIndex);
     });
   });
 }
 
-function updateContent(index) {
-  // Remove the active class from all images
+function removeActiveClassFromImages() {
   images.forEach((image) => image.classList.remove("active"));
-
-  // Add the active class to the new active image
-  images[index].classList.add("active");
-
-  // Update the description
-  description.textContent = images[index].dataset.desc;
-
-  // Update the dots
-  updateDots();
 }
+
+function addActiveClassToImage(index) {
+  images[index].classList.add("active");
+}
+
+function updateDescription(index) {
+  description.textContent = images[index].dataset.desc;
+}
+
 function updateDots(index) {
   const dotSpans = document.querySelectorAll(".dot");
   dotSpans.forEach((dot) => dot.classList.remove("active"));
   dotSpans[index].classList.add("active");
+}
+
+function updateContent(index) {
+  removeActiveClassFromImages();
+  addActiveClassToImage(index);
+  updateDescription(index);
+  updateDots(index);
 }

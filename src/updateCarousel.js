@@ -5,12 +5,21 @@ const { images, description } = cacheDOM();
 let { index } = setInitiators();
 
 export function updateContent() {
+  updateImages();
+  updateDescription();
+  updateDots();
+}
+
+function updateImages() {
   images.forEach((image) => image.classList.remove("active"));
   images[index].classList.add("active");
-  navigate();
+}
+
+function updateDescription() {
   description.textContent = images[index].dataset.desc;
 }
-export function navigate() {
+
+function updateDots() {
   const dotSpans = document.querySelectorAll(".dot");
   dotSpans.forEach((dot) => dot.classList.remove("active"));
   dotSpans[index].classList.add("active");
