@@ -1,3 +1,3 @@
-# Drop Down Menu
+# Image Carousel
 
-The Odin Project's DropDown Menu Assignment
+The Odin Project's Image Carousel Assignment
