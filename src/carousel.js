@@ -1,46 +1,45 @@
 import { cacheDOM } from "./domUtils";
+import navigateCarousel from "./navbtns";
+import setInitiators from "./initiators";
+import { updateContent } from "./updateCarousel";
 
-const { images, dots, description } = cacheDOM();
+const { images, dots } = cacheDOM();
+let { speed, index, intervalID } = setInitiators();
 
 export default function createCarousel() {
-  let speed = 5000;
-  let index = 0;
-  let intervalID;
-
   function startInterval() {
     if (intervalID) clearInterval(intervalID);
     intervalID = setInterval(() => {
-      index++;
-      if (index === images.length) index = 0;
+      index = (index + 1) % images.length;
       updateContent();
     }, speed);
   }
 
-  images.forEach((image, i) => {
-    const dotSpan = document.createElement("span");
-    dotSpan.classList.add("dot");
+  function setupDots() {
+    images.forEach((image, i) => {
+      const dotSpan = document.createElement("span");
+      dotSpan.classList.add("dot");
 
-    if (i === 0) {
-      dotSpan.classList.add("active");
-    }
-    dotSpan.addEventListener("click", () => {
-      index = i;
-      startInterval();
-      updateContent();
+      if (i === 0) {
+        dotSpan.classList.add("active");
+      }
+
+      dotSpan.addEventListener("click", () => {
+        index = i;
+        startInterval();
+        updateContent();
+      });
+
+      dots.appendChild(dotSpan);
     });
-    dots.appendChild(dotSpan);
-  });
-
-  function updateContent() {
-    images.forEach((image) => image.classList.remove("active"));
-    images[index].classList.add("active");
-
-    const dotSpans = document.querySelectorAll(".dot");
-    dotSpans.forEach((dot) => dot.classList.remove("active"));
-    dotSpans[index].classList.add("active");
-
-    description.textContent = images[index].dataset.desc;
   }
 
-  startInterval();
+  function initializeCarousel() {
+    setupDots();
+    updateContent();
+    startInterval();
+    navigateCarousel();
+  }
+
+  initializeCarousel();
 }
