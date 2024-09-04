@@ -3,8 +3,8 @@ export function cacheDOM() {
   const images = carauselContainer.querySelectorAll("#carauselContainer img");
   const dots = carauselContainer.querySelector("#nav #dots");
   const description = carauselContainer.querySelector("#nav #desc");
-  const carauselNavBtn = carauselContainer.querySelectorAll(
+  const carouselNavBtn = carauselContainer.querySelectorAll(
     "[data-carousel-btn]",
   );
-  return { images, dots, description, carauselNavBtn };
+  return { images, dots, description, carouselNavBtn };
 }
